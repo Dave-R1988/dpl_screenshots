@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dpl-screenshots"
+version = "0.1.0"
+description = "Tools for working with screenshots."
+requires-python = ">=3.10"
+dependencies = [
+    "opencv-python",
+    "pytesseract",
+    "numpy",
+    "Pillow",
+    "matplotlib",
+]
+
+[project.scripts]
+dpl-screenshots = "dpl_screenshots.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["dpl_screenshots*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
