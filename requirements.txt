@@ -3,6 +3,7 @@ pytesseract
 numpy
 Pillow
 matplotlib
+pylcs
 
 # Development tools
 pytest
