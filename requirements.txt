@@ -4,6 +4,8 @@ numpy
 Pillow
 matplotlib
 pylcs
+duckdb
+apache-airflow
 
 # Development tools
 pytest
