@@ -37,8 +37,10 @@ pre-commit run --all-files
 ```
 
 The CLI entry point is available as `python -m dpl_screenshots.main` or,
-after installing the project, `dpl-screenshots`. Both currently display help;
-no screenshot-processing commands have been added yet.
+after installing the project, `dpl-screenshots`. The `analyze-imagetexts` and
+`analyze-imagehistograms` subcommands each accept a `screenshots_path`
+argument. Their handlers are placeholders and currently raise
+`NotImplementedError`.
 
 ## OCR dependency
 

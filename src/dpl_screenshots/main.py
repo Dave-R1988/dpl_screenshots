@@ -1,22 +1,47 @@
 import argparse
 from collections.abc import Sequence
 
-from .ocr import get_lcs_length, getimagetext
+from . import ocr
+
+
+def analyze_imagetexts(screenshots_path: str) -> None:
+    ocr.plot_lcs_lengths(screenshots_path, 2024, 2026)
+
+
+def analyze_imagehistograms(screenshots_path: str) -> None:
+    raise NotImplementedError("analyze-imagehistograms is not implemented yet")
 
 
 def main(argv: Sequence[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="dpl-screenshots",
-        description="Extract text from an image.",
+        description="Image processing data pipeline commands.",
     )
-    parser.add_argument("image_path0", help="Path to the first image to read.")
-    parser.add_argument("image_path1", help="Path to the second image to read.")
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    imagetexts_parser = subparsers.add_parser(
+        "analyze-imagetexts",
+        help="Analyze text in screenshots.",
+    )
+    imagetexts_parser.add_argument(
+        "screenshots_path",
+        help="Path to the screenshots.",
+    )
+
+    imagehistograms_parser = subparsers.add_parser(
+        "analyze-imagehistograms",
+        help="Analyze screenshot histograms.",
+    )
+    imagehistograms_parser.add_argument(
+        "screenshots_path",
+        help="Path to the screenshots.",
+    )
+
     args = parser.parse_args(argv)
-    img_text0 = getimagetext(args.image_path0)
-    img_text1 = getimagetext(args.image_path1)
-    print(img_text0)
-    print(img_text1)
-    print(get_lcs_length(img_text0, img_text1))
+    if args.command == "analyze-imagetexts":
+        analyze_imagetexts(args.screenshots_path)
+    elif args.command == "analyze-imagehistograms":
+        analyze_imagehistograms(args.screenshots_path)
 
 
 if __name__ == "__main__":
