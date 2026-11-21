@@ -36,5 +36,5 @@ def plot_lcs_lengths(inmages_path: str, start_year: int, end_year: int):
                                                                            other_image_str))
 
     pyplot.boxplot(lcs_lengths)
-    pyplot.title(f"{inmages_path}: longest commont substring lengths")
+    pyplot.title(f"{inmages_path}: longest common substring lengths")
     pyplot.show()
