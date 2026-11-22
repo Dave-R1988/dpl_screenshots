@@ -141,6 +141,11 @@ celerybeat.pid
 # DuckDB:
 *.duckdb
 
+# Image data:
+*.png 
+*.jpg 
+*.jpeg
+
 # RabbitMQ
 mnesia/
 rabbitmq/
