@@ -138,6 +138,9 @@ celerybeat.pid
 *.aof
 *.pid
 
+# DuckDB:
+*.duckdb
+
 # RabbitMQ
 mnesia/
 rabbitmq/

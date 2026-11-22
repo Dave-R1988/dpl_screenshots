@@ -1,7 +1,8 @@
 import argparse
 from collections.abc import Sequence
+from pathlib import Path
 
-from . import ocr
+from . import duckdb_setup, ocr
 
 
 def analyze_imagetexts(screenshots_path: str) -> None:
@@ -10,6 +11,9 @@ def analyze_imagetexts(screenshots_path: str) -> None:
 
 def analyze_imagehistograms(screenshots_path: str) -> None:
     raise NotImplementedError("analyze-imagehistograms is not implemented yet")
+
+def db_setup(db_path: Path) -> None:
+    duckdb_setup.duckdb_setup(db_path)
 
 
 def main(argv: Sequence[str] | None = None) -> None:
@@ -37,11 +41,22 @@ def main(argv: Sequence[str] | None = None) -> None:
         help="Path to the screenshots.",
     )
 
+    duckdb_setup = subparsers.add_parser(
+        "db-setup",
+        help="Set up db to store control and content data."
+    )
+    duckdb_setup.add_argument(
+        "db_path",
+        help="Directory where the database should be set up."
+    )
+
     args = parser.parse_args(argv)
     if args.command == "analyze-imagetexts":
         analyze_imagetexts(args.screenshots_path)
     elif args.command == "analyze-imagehistograms":
         analyze_imagehistograms(args.screenshots_path)
+    elif args.command == "db-setup":
+        db_setup(Path(args.db_path))
 
 
 if __name__ == "__main__":
