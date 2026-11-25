@@ -2,7 +2,7 @@ import argparse
 from collections.abc import Sequence
 from pathlib import Path
 
-from . import duckdb_setup, ocr
+from . import ocr, process_steps
 
 
 def analyze_imagetexts(screenshots_path: str) -> None:
@@ -12,8 +12,9 @@ def analyze_imagetexts(screenshots_path: str) -> None:
 def analyze_imagehistograms(screenshots_path: str) -> None:
     raise NotImplementedError("analyze-imagehistograms is not implemented yet")
 
+
 def db_setup(db_path: Path) -> None:
-    duckdb_setup.duckdb_setup(db_path)
+    process_steps.setup_db(db_path)
 
 
 def main(argv: Sequence[str] | None = None) -> None:
